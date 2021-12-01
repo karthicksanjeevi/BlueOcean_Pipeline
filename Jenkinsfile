@@ -26,9 +26,20 @@ pipeline {
     }
 
     stage('Compile') {
-      steps {
-        sh 'bash Compile.sh'
-        echo 'Compiled Successfully!!'
+      parallel {
+        stage('Compile') {
+          steps {
+            sh 'bash Compile.sh'
+            echo 'Compiled Successfully!!'
+          }
+        }
+
+        stage('Stage_Karthick') {
+          steps {
+            echo 'Message from Blue Ocean Editing'
+          }
+        }
+
       }
     }
 
